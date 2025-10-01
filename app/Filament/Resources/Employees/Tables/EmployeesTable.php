@@ -5,8 +5,10 @@ namespace App\Filament\Resources\Employees\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmployeesTable
 {
@@ -14,14 +16,28 @@ class EmployeesTable
     {
         return $table
             ->columns([
-                TextColumn::make('last_name')
-                    ->searchable(),
-                TextColumn::make('first_name')
-                    ->searchable(),
-                TextColumn::make('middle_name')
-                    ->searchable(),
-                TextColumn::make('suffix')
-                    ->searchable(),
+                TextColumn::make('full_name')
+                    ->label('Name')
+                    ->getStateUsing(function ($record): string {
+                        $parts = array_filter([
+                            $record->last_name ?? null,
+                            $record->first_name ?? null,
+                            $record->middle_name ?? null,
+                            $record->suffix ?? null,
+                        ], fn ($value) => filled($value));
+
+                        return trim(implode(' ', $parts));
+                    })
+                    ->searchable(query: function (Builder $query, string $search) {
+                        $query->where(function (Builder $q) use ($search) {
+                            $q->where('first_name', 'like', "%{$search}%")
+                                ->orWhere('middle_name', 'like', "%{$search}%")
+                                ->orWhere('last_name', 'like', "%{$search}%")
+                                ->orWhere('suffix', 'like', "%{$search}%");
+                        });
+                    }),
+                SelectColumn::make('gender')
+                    ->options(Gender::class),
                 TextColumn::make('office_id')
                     ->label('Office')
                     ->searchable(),

@@ -16,15 +16,15 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('middle_name');
-            $table->string('suffix');
+            $table->string('middle_name')->nullable();
+            $table->string('suffix')->nullable();
             $table->foreignIdFor(Office::class)->constrained;
-            $table->string('designation');
+            $table->string('designation')->nullable();
             $table->string('employment_status');
-            $table->string('group');
+            $table->string('group')->nullable();
             $table->timestamp('registration_date');
-            $table->string('scanner_id');
-            $table->string('office_scanner_id');
+            $table->string('scanner_id')->nullable();
+            $table->string('office_scanner_id')->nullable();
             $table->timestamps();
         });
     }
