@@ -7,6 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use App\Enums\EmploymentStatus;
+use App\Enums\CivilStatus;
 use App\Enums\Sex;
 
 class EmployeeForm
@@ -24,6 +25,9 @@ class EmployeeForm
                     ->required(),
                 Select::make('sex')
                     ->options(Sex::class)
+                    ->required(),
+                Select::make('civil_status')
+                    ->options(CivilStatus::class)
                     ->required(),
                 Select::make('office_id')
                     ->label('Office')

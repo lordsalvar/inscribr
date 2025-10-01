@@ -20,14 +20,20 @@ class EmployeesTable
                 TextColumn::make('full_name')
                     ->label('Name')
                     ->getStateUsing(function ($record): string {
-                        $parts = array_filter([
-                            $record->last_name ?? null,
+                        $nameParts = array_filter([
                             $record->first_name ?? null,
                             $record->middle_name ?? null,
                             $record->suffix ?? null,
                         ], fn ($value) => filled($value));
 
-                        return trim(implode(' ', $parts));
+                        $lastName = $record->last_name ?? '';
+                        $rightSide = trim(implode(' ', $nameParts));
+
+                        if (filled($lastName) && filled($rightSide)) {
+                            return $lastName . ', ' . $rightSide;
+                        }
+
+                        return trim($lastName ?: $rightSide);
                     })
                     ->searchable(query: function (Builder $query, string $search) {
                         $query->where(function (Builder $q) use ($search) {
@@ -37,7 +43,6 @@ class EmployeesTable
                                 ->orWhere('suffix', 'like', "%{$search}%");
                         });
                     }),
-                TextColumn::make('sex'),
                 TextColumn::make('office.acronym')
                     ->label('Office')
                     ->searchable(),
