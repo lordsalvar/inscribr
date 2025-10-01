@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('suffix')->nullable();
+            $table->string('sex');
             $table->foreignIdFor(Office::class)->constrained;
             $table->string('designation')->nullable();
             $table->string('employment_status');

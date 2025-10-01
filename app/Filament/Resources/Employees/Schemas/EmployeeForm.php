@@ -7,6 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use App\Enums\EmploymentStatus;
+use App\Enums\Sex;
 
 class EmployeeForm
 {
@@ -20,6 +21,9 @@ class EmployeeForm
                     ->required(),
                 TextInput::make('middle_name'),
                 TextInput::make('suffix')
+                    ->required(),
+                Select::make('sex')
+                    ->options(Sex::class)
                     ->required(),
                 Select::make('office_id')
                     ->label('Office')

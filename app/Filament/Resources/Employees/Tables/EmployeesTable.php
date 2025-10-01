@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Employees\Tables;
 
+use App\Enums\Sex;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -36,9 +37,8 @@ class EmployeesTable
                                 ->orWhere('suffix', 'like', "%{$search}%");
                         });
                     }),
-                SelectColumn::make('gender')
-                    ->options(Gender::class),
-                TextColumn::make('office_id')
+                TextColumn::make('sex'),
+                TextColumn::make('office.acronym')
                     ->label('Office')
                     ->searchable(),
                 TextColumn::make('designation')
@@ -72,9 +72,9 @@ class EmployeesTable
                 EditAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                // BulkActionGroup::make([
+                //     DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 }
