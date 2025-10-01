@@ -21,6 +21,7 @@ class Employee extends Model
         'group',
         'registration_date',
         'scanner_id',
+        'office_scanner_id',
     ];
 
     public function office()
