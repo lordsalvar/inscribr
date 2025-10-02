@@ -26,10 +26,7 @@ class UserForm
                     ->password()
                     ->required(),
                 Select::make('role')
-                    ->options([
-                        UserRoles::ADMIN->value => 'Admin',
-                        UserRoles::OFFICER->value => 'Officer',
-                    ])
+                    ->options(UserRoles::class)
                     ->required(),
                 Select::make('offices')
                     ->label('Offices')
