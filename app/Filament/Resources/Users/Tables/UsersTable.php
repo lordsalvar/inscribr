@@ -19,11 +19,22 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
+                TextColumn::make('role')
+                    ->searchable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        'officer' => 'success',
+                        default => 'gray',
+                    }),
+                TextColumn::make('offices.name')
+                    ->label('Offices')
+                    ->badge()
+                    ->separator(', ')
+                    ->placeholder('No offices assigned'),
                 TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('role')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
