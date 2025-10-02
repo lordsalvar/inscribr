@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Employee extends Model
 {
@@ -29,5 +30,12 @@ class Employee extends Model
     public function office()
     {
         return $this->belongsTo(Office::class);
+    }
+
+    public function enrolledOffices(): BelongsToMany
+    {
+        return $this->belongsToMany(Office::class)
+            ->withPivot(['office_scanner_id'])
+            ->withTimestamps();
     }
 }

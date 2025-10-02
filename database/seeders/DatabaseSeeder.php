@@ -42,34 +42,34 @@ class DatabaseSeeder extends Seeder
         $picto = Office::where('acronym', 'PICTO')->first();
         $phrdo = Office::where('acronym', 'PHRDO')->first();
 
-        if ($picto) {
-            foreach (range(1, 5) as $scannerId) {
-                Employee::create([
-                    'first_name' => 'User',
-                    'last_name' => 'PICTO'.$scannerId,
-                    'sex' => Sex::MALE->value,
-                    'civil_status' => CivilStatus::SINGLE->value,
-                    'office_id' => $picto->id,
-                    'employment_status' => EmploymentStatus::REGULAR->value,
-                    'registration_date' => now(),
-                    'scanner_id' => $scannerId,
-                ]);
-            }
-        }
+        // if ($picto) {
+        //     foreach (range(1, 5) as $scannerId) {
+        //         Employee::create([
+        //             'first_name' => 'User',
+        //             'last_name' => 'PICTO'.$scannerId,
+        //             'sex' => Sex::MALE->value,
+        //             'civil_status' => CivilStatus::SINGLE->value,
+        //             'office_id' => $picto->id,
+        //             'employment_status' => EmploymentStatus::REGULAR->value,
+        //             'registration_date' => now(),
+        //             'scanner_id' => $scannerId,
+        //         ]);
+        //     }
+        // }
 
-        if ($phrdo) {
-            foreach (range(20, 24) as $scannerId) { // 5 employees: 20..24
-                Employee::create([
-                    'first_name' => 'User',
-                    'last_name' => 'PHRDO'.$scannerId,
-                    'sex' => Sex::FEMALE->value,
-                    'civil_status' => CivilStatus::SINGLE->value,
-                    'office_id' => $phrdo->id,
-                    'employment_status' => EmploymentStatus::REGULAR->value,
-                    'registration_date' => now(),
-                    'scanner_id' => $scannerId,
-                ]);
-            }
-        }
+        // if ($phrdo) {
+        //     foreach (range(20, 24) as $scannerId) { // 5 employees: 20..24
+        //         Employee::create([
+        //             'first_name' => 'User',
+        //             'last_name' => 'PHRDO'.$scannerId,
+        //             'sex' => Sex::FEMALE->value,
+        //             'civil_status' => CivilStatus::SINGLE->value,
+        //             'office_id' => $phrdo->id,
+        //             'employment_status' => EmploymentStatus::REGULAR->value,
+        //             'registration_date' => now(),
+        //             'scanner_id' => $scannerId,
+        //         ]);
+        //     }
+        // }
     }
 }

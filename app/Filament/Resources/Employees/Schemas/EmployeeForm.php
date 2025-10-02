@@ -61,7 +61,6 @@ class EmployeeForm
                         Select::make('office_id')
                             ->label('Office')
                             ->relationship('office', 'name')
-                            ->required()
                             ->live()
                             ->afterStateUpdated(function (Set $set, $state) {
                                 if (blank($state)) {

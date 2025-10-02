@@ -9,6 +9,7 @@ use App\Filament\Resources\Offices\Schemas\OfficeForm;
 use App\Filament\Resources\Offices\Tables\OfficesTable;
 use App\Filament\Resources\Offices\RelationManagers\OfficersRelationManager;
 use App\Filament\Resources\Offices\RelationManagers\EmployeesRelationManager;
+use App\Filament\Resources\Offices\RelationManagers\EnrolledEmployeesRelationManager;
 use App\Models\Office;
 use App\Models\User;
 use BackedEnum;
@@ -39,7 +40,7 @@ class OfficeResource extends Resource
     {
         return [
             OfficersRelationManager::class,
-            EmployeesRelationManager::class,
+            EnrolledEmployeesRelationManager::class,
         ];
     }
 

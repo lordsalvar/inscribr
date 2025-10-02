@@ -29,4 +29,11 @@ class Office extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function enrolledEmployees(): BelongsToMany
+    {
+        return $this->belongsToMany(Employee::class)
+            ->withPivot(['office_scanner_id'])
+            ->withTimestamps();
+    }
 }
