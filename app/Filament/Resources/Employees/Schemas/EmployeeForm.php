@@ -9,6 +9,8 @@ use Filament\Schemas\Schema;
 use App\Enums\EmploymentStatus;
 use App\Enums\CivilStatus;
 use App\Enums\Sex;
+use App\Enums\Status;
+use App\Enums\OfficeStatus;
 
 class EmployeeForm
 {
@@ -42,6 +44,12 @@ class EmployeeForm
                 DateTimePicker::make('registration_date')
                     ->required(),
                 TextInput::make('scanner_id')
+                    ->required(),
+                Select::make('status')
+                    ->options(Status::class)
+                    ->required(),
+                Select::make('office_status')
+                    ->options(OfficeStatus::class)
                     ->required(),
                 TextInput::make('office_scanner_id')
                     ->required(),
