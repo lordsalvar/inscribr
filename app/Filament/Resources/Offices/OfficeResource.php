@@ -7,7 +7,10 @@ use App\Filament\Resources\Offices\Pages\EditOffice;
 use App\Filament\Resources\Offices\Pages\ListOffices;
 use App\Filament\Resources\Offices\Schemas\OfficeForm;
 use App\Filament\Resources\Offices\Tables\OfficesTable;
+use App\Filament\Resources\Offices\RelationManagers\OfficersRelationManager;
+use App\Filament\Resources\Offices\RelationManagers\EmployeesRelationManager;
 use App\Models\Office;
+use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -20,7 +23,7 @@ class OfficeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'acronym';
 
     public static function form(Schema $schema): Schema
     {
@@ -35,7 +38,8 @@ class OfficeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OfficersRelationManager::class,
+            EmployeesRelationManager::class,
         ];
     }
 

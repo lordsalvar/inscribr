@@ -16,4 +16,14 @@ class EditOffice extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    public function getTitle(): string
+    {
+        return $this->record->acronym;
+    }
+
+    public function getSubheading(): ?string
+    {
+        return $this->record->name;
+    }
 }
