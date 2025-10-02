@@ -10,7 +10,6 @@ use App\Enums\EmploymentStatus;
 use App\Enums\CivilStatus;
 use App\Enums\Sex;
 use App\Enums\Status;
-use App\Enums\OfficeStatus;
 
 class EmployeeForm
 {
@@ -23,8 +22,7 @@ class EmployeeForm
                 TextInput::make('first_name')
                     ->required(),
                 TextInput::make('middle_name'),
-                TextInput::make('suffix')
-                    ->required(),
+                TextInput::make('suffix'),
                 Select::make('sex')
                     ->options(Sex::class)
                     ->required(),
@@ -44,14 +42,10 @@ class EmployeeForm
                 DateTimePicker::make('registration_date')
                     ->required(),
                 TextInput::make('scanner_id')
+                    ->label('Convo ID')
                     ->required(),
                 Select::make('status')
                     ->options(Status::class)
-                    ->required(),
-                Select::make('office_status')
-                    ->options(OfficeStatus::class)
-                    ->required(),
-                TextInput::make('office_scanner_id')
                     ->required(),
             ]);
     }

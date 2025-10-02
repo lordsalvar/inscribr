@@ -27,9 +27,9 @@ return new class extends Migration
             $table->string('employment_status');
             $table->string('group')->nullable();
             $table->timestamp('registration_date');
-            $table->string('scanner_id')->nullable();
+            $table->integer('scanner_id');
             $table->string('status')->default(Status::ACTIVE);
-            $table->string('office_scanner_id')->nullable();
+            $table->integer('office_scanner_id')->nullable();
             $table->string('office_status')->default(OfficeStatus::ACTIVE);
             $table->timestamps();
         });
