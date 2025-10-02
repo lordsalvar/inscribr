@@ -22,10 +22,15 @@ class EmployeesTable
                 TextColumn::make('full_name')
                     ->label('Name')
                     ->getStateUsing(function ($record): string {
+                        $suffix = $record->suffix ?? null;
+                        if (is_string($suffix) && trim($suffix) === 'N/A') {
+                            $suffix = null;
+                        }
+
                         $nameParts = array_filter([
                             $record->first_name ?? null,
                             $record->middle_name ?? null,
-                            $record->suffix ?? null,
+                            $suffix,
                         ], fn ($value) => filled($value));
 
                         $lastName = $record->last_name ?? '';
