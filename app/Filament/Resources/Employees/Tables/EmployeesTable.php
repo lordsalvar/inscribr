@@ -3,11 +3,13 @@
 namespace App\Filament\Resources\Employees\Tables;
 
 use App\Enums\Sex;
+use App\Models\Office;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -57,9 +59,7 @@ class EmployeesTable
                     ->sortable(),
                 TextColumn::make('scanner_id')
                     ->label('Convo ID')
-                    ->searchable(),
-                TextColumn::make('office_scanner_id')
-                    ->label('Daily ID')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -71,7 +71,9 @@ class EmployeesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('office_id')
+                    ->label('Office')
+                    ->options(Office::all()->pluck('name', 'id')),
             ])
             ->recordActions([
                 EditAction::make(),

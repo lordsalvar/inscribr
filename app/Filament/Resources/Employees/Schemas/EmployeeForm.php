@@ -19,6 +19,7 @@ class EmployeeForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(3)
             ->components([
                 TextInput::make('last_name')
                     ->required(),
