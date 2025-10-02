@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use App\Enums\EmploymentStatus;
 
 class EmployeesTable
 {
@@ -50,41 +51,54 @@ class EmployeesTable
                                 ->orWhere('suffix', 'like', "%{$search}%");
                         });
                     }),
-                TextColumn::make('office.acronym')
+				TextColumn::make('office.acronym')
                     ->label('Office')
                     ->searchable(),
-                TextColumn::make('designation')
+				TextColumn::make('designation')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('employment_status')
+					->toggleable(isToggledHiddenByDefault: true)
+					->visibleFrom('lg'),
+				TextColumn::make('employment_status')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('group')
+					->toggleable(isToggledHiddenByDefault: false)
+					->visibleFrom('md'),
+				TextColumn::make('group')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('registration_date')
+					->toggleable(isToggledHiddenByDefault: true)
+					->visibleFrom('lg'),
+				TextColumn::make('registration_date')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+					->toggleable(isToggledHiddenByDefault: false)
+					->visibleFrom('md'),
                 TextColumn::make('scanner_id')
                     ->label('Convo ID')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('created_at')
+				TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+					->toggleable(isToggledHiddenByDefault: true)
+					->visibleFrom('lg'),
+				TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+					->toggleable(isToggledHiddenByDefault: true)
+					->visibleFrom('lg'),
                     
             ])
             ->filters([
                 SelectFilter::make('office_id')
                     ->label('Office')
-                    ->options(Office::all()->pluck('name', 'id')),
+                    ->options(Office::all()->pluck('acronym', 'id')),
+                SelectFilter::make('employment_status')
+                    ->label('Employment Status')
+                    ->options(function () {
+                        return collect(EmploymentStatus::cases())
+                            ->mapWithKeys(fn (EmploymentStatus $e) => [$e->value => $e->value])
+                            ->all();
+                    }),
             ])
             ->recordActions([
                 EditAction::make(),
