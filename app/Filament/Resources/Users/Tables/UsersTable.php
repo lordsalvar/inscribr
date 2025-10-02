@@ -21,7 +21,7 @@ class UsersTable
                     ->searchable(),
                 TextColumn::make('role')
                     ->searchable(),
-                TextColumn::make('offices.name')
+                TextColumn::make('offices.acronym')
                     ->label('Offices')
                     ->separator(', ')
                     ->placeholder('No offices assigned'),

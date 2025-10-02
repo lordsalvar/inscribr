@@ -78,6 +78,7 @@ class EmployeesTable
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                     
             ])
             ->filters([
