@@ -11,13 +11,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employee_office', function (Blueprint $table) {
-            $table->ulid('id')->primary();
             $table->foreignUlid('employee_id')->constrained('employees')->cascadeOnDelete();
-            $table->foreignIdFor(Office::class)->constrained()->cascadeOnDelete();
+            $table->foreignUlid('office_id')->constrained('offices')->cascadeOnDelete();
             $table->unsignedInteger('office_scanner_id')->nullable();
             $table->timestamps();
 
-            $table->unique(['employee_id', 'office_id']);
+            $table->primary(['employee_id', 'office_id']);
         });
     }
 
