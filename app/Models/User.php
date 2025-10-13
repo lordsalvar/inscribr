@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -54,5 +55,15 @@ class User extends Authenticatable
     public function offices(): BelongsToMany
     {
         return $this->belongsToMany(Office::class);
+    }
+
+    /**
+     * Assignments to scanners via polymorphic relation.
+     */
+    public function scanners(): MorphToMany
+    {
+        return $this->morphedByMany(Scanner::class, 'assignable', 'assignments')
+            ->withPivot(['active'])
+            ->withTimestamps();
     }
 }
