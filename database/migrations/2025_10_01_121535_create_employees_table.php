@@ -16,8 +16,10 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->string('uid')->nullable();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('email')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('suffix')->nullable();
             $table->string('sex');
@@ -29,9 +31,11 @@ return new class extends Migration
             $table->timestamp('registration_date');
             $table->integer('scanner_id');
             $table->string('status')->default(Status::ACTIVE);
+            $table->boolean('active')->default(true);
             $table->integer('office_scanner_id')->nullable();
             $table->string('office_status')->default(OfficeStatus::ACTIVE);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

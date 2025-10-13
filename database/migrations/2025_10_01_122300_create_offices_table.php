@@ -15,7 +15,11 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('acronym');
             $table->string('name');
+            $table->string('code')->nullable();
+            $table->ulid('employee_id')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
