@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('/')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Purple,
             ])
             ->plugins([
                 FilamentPwaPlugin::make(),

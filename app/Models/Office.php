@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Office extends Model
 {
@@ -15,6 +16,9 @@ class Office extends Model
     protected $fillable = [
         'acronym',
         'name',
+        'code',
+        'employee_id',
+        'description',
     ];
 
     public function employees(): HasMany
@@ -35,5 +39,15 @@ class Office extends Model
         return $this->belongsToMany(Employee::class)
             ->withPivot(['office_scanner_id'])
             ->withTimestamps();
+    }
+
+    public function deployments(): HasMany
+    {
+        return $this->hasMany(Deployment::class);
+    }
+
+    public function head(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 }
