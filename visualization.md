@@ -29,3 +29,20 @@ Data access for consumers:
 ```
 
 
+#document creation module
+
+---
+# Signing Module
+## Using PyHanko
+Must have repository of p12s for each users
+```mermaid
+
+```
+signatures
+- specimen
+- certificate
+- fk user
+
+### Signing
+must use python script called via processes in laravel 
+### using ai we should be able to snipe the signature fields of the specific user via their name 
